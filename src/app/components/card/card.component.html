@@ -1,0 +1,86 @@
+<div class="card text-dark mb-1" [ngClass]="getword(title) ?  title===('Definition') || title===('length') ? 'bg-free' : 'bg-gray' : '' " >
+  <div class="card-header clearfix">
+    <span class="float-start">{{index}} . {{ title | titlecase }}</span>
+    <span class="float-end">{{ point }}</span>
+  </div>  
+  <div [ngSwitch]="title" class="card-body" >
+    <ng-container *ngSwitchCase="'Definition'">
+      <p *ngIf="words.definition" class="card-text">
+        {{ words.definition }} 
+      </p>
+      <a
+        *ngIf="!words.definition"
+        (click)="setDefinition()"
+        href="#"
+        class="btn btn-primary"
+        >Reveal Hint</a
+      >
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'example'">
+      <p *ngIf="words.example" class="card-text">
+        {{ words.example }}
+      </p>
+      <a
+        *ngIf="!words.example"
+        (click)="setExample()"
+        href="#"
+        class="btn btn-primary"
+        >Reveal Hint</a
+      >
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'synonym'" >
+      <p *ngIf="words.synonym"  class="card-text">
+        {{ words.synonym }}
+      </p>
+      <a
+        *ngIf="!words.synonym"
+        (click)="setSynonym()"
+        href="#"
+        class="btn btn-primary"
+        
+        >Reveal Hint</a
+      >
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'antonym'">
+      <p *ngIf="words.antonym" class="card-text">
+        {{ words.antonym }}
+      </p>
+      <a
+        href="#"
+        *ngIf="!words.antonym"
+        (click)="setAntonym()"
+        class="btn btn-primary"
+        >Reveal Hint</a
+      >
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'jumbled'">
+      <p *ngIf="words.jumbled" class="card-text">
+        {{ words.jumbled }}
+      </p>
+      <a
+        *ngIf="!words.jumbled"
+        (click)="setJumble()"
+        href="#"
+        class="btn btn-primary"
+        >Reveal Hint</a
+      >
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'length'">
+      <p *ngIf="words.length" class="card-text">
+        {{ words.length }}
+      </p>
+      <a
+        *ngIf="!words.length"
+        (click)="setLength()"
+        href="#"
+        class="btn btn-primary"
+        >Reveal Hint</a
+      >
+    </ng-container>
+  </div>
+</div>

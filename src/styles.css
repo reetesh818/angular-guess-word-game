@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+@import '~ngx-toastr/toastr';
+
+*{
+    box-sizing: border-box;
+}
+
+.bg-lime{
+    background-color: #81FF6D;
+}
+
+.bg-limered{
+    background-color: #d85d37;
+}
+
+.bg-gray{
+ background-color: rgb(216, 175, 157);
+}
+
+.bg-free{
+    background-color: rgb(116, 154, 187);
+}
