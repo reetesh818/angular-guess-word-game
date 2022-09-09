@@ -23,3 +23,7 @@
 .bg-free{
     background-color: rgb(116, 154, 187);
 }
+
+.cursor-pointer{
+    cursor: pointer;
+}
