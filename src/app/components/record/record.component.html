@@ -1,14 +1,30 @@
 <div class="container p-1 mt-0">
-    <p class="bg-success rounded p-2 bg-opacity-75">Score :{{getScore()}} </p>
-    <button class="btn btn-danger w-auto " (click)="getNew()">Get New Word (-4 pts)</button>
-    <div *ngIf="getHistory().length" class="history container text-dark bg-light my-2 p-2">
-        <h3 >History</h3>
-        <ng-container *ngFor="let past of getHistory()">
-            <div (click)="alerts(past.word)" [ngClass]="past.correct ? 'border-success bg-lime' : 'border-danger bg-limered'" class="rounded border  clearfix  m-1 p-1">
-                <span class="float-none">{{past.word}}</span>
-                <span class="float-end">{{past.points}}</span>
-            </div>
-        </ng-container>
-    </div>
-    <button class="btn btn-danger w-auto d-block mx-auto my-2 " (click)="resetGame()">Reset Game</button>
+  <p class="bg-success rounded p-2 bg-opacity-75">Score :{{ getScore() }}</p>
+  <button class="btn btn-danger w-auto" (click)="getNew()">
+    Get New Word (-4 pts)
+  </button>
+  <div
+    *ngIf="getHistory().length"
+    class="history container text-dark bg-light my-2 p-2"
+  >
+    <h3>History</h3>
+    <ng-container *ngFor="let past of getHistory(); let i = index">
+      <div
+        (click)="handleHistory(i)"
+        [ngClass]="
+          past.correct ? 'border-success bg-lime' : 'border-danger bg-limered'
+        "
+        class="rounded border clearfix m-1 p-1"
+      >
+        <span class="float-none">{{ past.word }}</span>
+        <span class="float-end">{{ past.points }}</span>
+      </div>
+    </ng-container>
+  </div>
+  <button
+    class="btn btn-danger w-auto d-block mx-auto my-2"
+    (click)="resetGame()"
+  >
+    Reset Game
+  </button>
 </div>

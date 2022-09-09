@@ -1,12 +1,22 @@
-<div class="card text-dark mb-1" [ngClass]="getword(title) ?  title===('Definition') || title===('length') ? 'bg-free' : 'bg-gray' : '' " >
+<div
+  class="card text-dark mb-1"
+  [ngClass]="
+    getword(title)
+      ? title === 'Definition' || title === 'length'
+        ? 'bg-free'
+        : 'bg-gray'
+      : ''
+  "
+>
   <div class="card-header clearfix">
-    <span class="float-start">{{index}} . {{ title | titlecase }}</span>
+    <span class="float-start">{{ index }} . {{ title | titlecase }}</span>
     <span class="float-end">{{ point }}</span>
-  </div>  
-  <div [ngSwitch]="title" class="card-body" >
+  </div>
+  
+  <div [ngSwitch]="title" class="card-body">
     <ng-container *ngSwitchCase="'Definition'">
       <p *ngIf="words.definition" class="card-text">
-        {{ words.definition }} 
+        {{ words.definition }}
       </p>
       <a
         *ngIf="!words.definition"
@@ -30,8 +40,8 @@
       >
     </ng-container>
 
-    <ng-container *ngSwitchCase="'synonym'" >
-      <p *ngIf="words.synonym"  class="card-text">
+    <ng-container *ngSwitchCase="'synonym'">
+      <p *ngIf="words.synonym" class="card-text">
         {{ words.synonym }}
       </p>
       <a
@@ -39,7 +49,6 @@
         (click)="setSynonym()"
         href="#"
         class="btn btn-primary"
-        
         >Reveal Hint</a
       >
     </ng-container>

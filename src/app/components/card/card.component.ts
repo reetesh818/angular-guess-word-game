@@ -23,7 +23,6 @@ export class CardComponent implements OnInit {
 
   getword(title:string){
     title=title.toLowerCase();
-    console.log((this.words as any)[title])
     return (this.words as any)[title]
   }
 

@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
-
-import {HttpClientModule} from '@angular/common/http'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FormsModule } from '@angular/forms';
 
@@ -13,19 +11,14 @@ import { RecordComponent } from './components/record/record.component';
 import { CardComponent } from './components/card/card.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    RecordComponent,
-    CardComponent
-  ],
+  declarations: [AppComponent, RecordComponent, CardComponent],
   imports: [
     BrowserModule,
-    HttpClientModule,
     FormsModule,
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

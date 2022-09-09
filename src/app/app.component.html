@@ -1,27 +1,46 @@
 <div class="container-fluid">
-  <div class="row bg-dark text-white text-center p-2 d-flex justify-content-center">
+  <div
+    class="row bg-dark text-white text-center p-2 d-flex justify-content-center"
+  >
     <h1>Welcome to Word Guess Game</h1>
     <p>Guess the word</p>
-     <form class="w-auto">
-      <input class=" w-auto p-2 rounded-3 text-center " (submit)="handleGuess(guess)" type="text" name="guess" id="guess" [(ngModel)]="guess" />
-    <button  type="submit" (click)="handleGuess(guess)" class="w-auto btn btn-primary  m-1">Confirm</button>
-     </form>
+    <form class="w-auto">
+      <input
+        class="w-auto p-2 rounded-3 text-center"
+        (submit)="handleGuess(guess)"
+        type="text"
+        name="guess"
+        id="guess"
+        [(ngModel)]="guess"
+      />
+      <button
+        type="submit"
+        (click)="handleGuess(guess)"
+        class="w-auto btn btn-primary m-1"
+      >
+        Confirm
+      </button>
+    </form>
   </div>
- 
-  <div class="row  bg-primary text-white text-center">
-    <div *ngIf="get_guesses().length" class="user-guess bg-dark p-1 text-start" >
-      Guesses: 
+
+  <div class="row bg-primary text-white text-center">
+    <div *ngIf="get_guesses().length" class="user-guess bg-dark p-1 text-start">
+      Guesses:
       <ng-container *ngFor="let guess of get_guesses()">
-      <span class="word bg-primary m-1 py-1 px-2 rounded">{{guess}}</span>
+        <span class="word bg-primary m-1 py-1 px-2 rounded">{{ guess }}</span>
       </ng-container>
     </div>
     <div class="col-md-8 bg-success">
-      <ng-container *ngFor="let title of details | keyvalue; let i = index" >
-        <app-card title="{{title.key}}" point="{{title.value}}" index="{{i+1}}"></app-card>
+      <ng-container *ngFor="let title of details | keyvalue; let i = index">
+        <app-card
+          title="{{ title.key }}"
+          point="{{ title.value }}"
+          index="{{ i + 1 }}"
+        ></app-card>
       </ng-container>
     </div>
-    <div class="col-md-4  bg-warning">
-      <app-record ></app-record>
+    <div class="col-md-4 bg-warning">
+      <app-record></app-record>
     </div>
   </div>
 </div>

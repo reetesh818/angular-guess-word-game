@@ -24,12 +24,13 @@ export class RecordComponent {
     this.game.getNewWord();
   }
 
-  alerts(message:string){
-    alert(message);
-  }
-
+  
   resetGame(){
     this.game.reset();
+  }
+
+  handleHistory(index:number){
+    this.game.handleHistory(index);
   }
 
 }

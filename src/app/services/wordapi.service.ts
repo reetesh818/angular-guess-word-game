@@ -1,30 +1,29 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient } from '@angular/common/http'
+import { environment } from '../../environments/environment';
 
-import {environment} from '../../environments/environment'
+import { ToastrService } from 'ngx-toastr';
 import axios from 'axios';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class WordapiService {
+  api_host = environment.api_host;
+  api_key = environment.api_key;
 
-  api_host = environment.api_host
-  api_key = environment.api_key
+  constructor(private toastr: ToastrService) {}
 
-  constructor(private http:HttpClient) { }
-
-  getDefinition(word:string) {
+  getDefinition(word: string) {
     return axios
       .get(`${this.api_host}/word/${word}/definitions?api_key=${this.api_key}`)
       .then((response) => {
-        return (response.data);
+        return response.data;
       })
       .catch((err) => this.handleError(err));
   }
 
-  getRelatedWord(word:string) {
+  getRelatedWord(word: string) {
     return axios
       .get(`${this.api_host}/word/${word}/relatedWords?api_key=${this.api_key}`)
       .then((response) => {
@@ -33,22 +32,22 @@ export class WordapiService {
       .catch((err) => this.handleError(err));
   }
 
-  getExample(word:string) {
+  getExample(word: string) {
     return axios
       .get(`${this.api_host}/word/${word}/examples?api_key=${this.api_key}`)
       .then((response) => {
-        return (response.data.examples);
+        return response.data.examples;
       })
       .catch((err) => this.handleError(err));
   }
 
-  async getAntonym(word:string) {
+  async getAntonym(word: string) {
     const res = await this.getRelatedWord(word);
     if (res.length > 1) return res[0].words;
     else return 'No antonym found';
   }
 
-  async getSynonym(word:string) {
+  async getSynonym(word: string) {
     const res = await this.getRelatedWord(word);
     if (res.length > 1) return res[1].words;
     else return res[0].words;
@@ -59,7 +58,7 @@ export class WordapiService {
       const res = await axios.get(
         `${this.api_host}/words/randomWord?api_key=${this.api_key}`
       );
-      let randWordDetails:any = {};
+      let randWordDetails: any = {};
 
       const randomWord = res.data.word;
       const definitions = this.getDefinition(randomWord);
@@ -84,18 +83,17 @@ export class WordapiService {
     }
   }
 
-  handleError(err:any) {
+  handleError(err: any) {
     //to handle authorization
     if (err.response.status === 401) {
-      console.log(
+      this.toastr.error(
         'Invalid API key -Go to https://fourtytwowords.herokuapp.com'
       );
-    } else if (err.response.status === 404) {   // to handle unreachable condition
-      console.log('Cannot reach the server, Try again later');
-    } else {                  //to handle when word doesn't exists
-      console.log('Something went wrong!'); 
+    } else if (err.response.status === 404) {
+      // to handle unreachable condition
+      this.toastr.error('Cannot reach the server, Try again later');
+    } else {
+      this.toastr.error('Something went wrong!');
     }
   }
-
-  
 }
