@@ -4,33 +4,32 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-record',
   templateUrl: './record.component.html',
-  styleUrls: ['./record.component.css']
+  styleUrls: ['./record.component.css'],
 })
 export class RecordComponent {
+  constructor(private game: GamelogicService, private toastr: ToastrService) {}
 
-  
-  constructor(private game:GamelogicService,private toastr:ToastrService) { }
-
-
-  getScore(){
+  getScore() {
     return this.game.score;
   }
 
-  getHistory(){
+  getHistory() {
     return this.game.history;
   }
 
-  getNew(){
+  getNew() {
     this.game.getNewWord();
   }
 
-  
-  resetGame(){
+  resetGame() {
     this.game.reset();
   }
 
-  handleHistory(index:number){
+  handleHistory(index: number) {
     this.game.handleHistory(index);
   }
 
+  clearHistory(){
+    this.game.history=[];
+  }
 }

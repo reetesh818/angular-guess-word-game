@@ -27,7 +27,7 @@
     <div *ngIf="get_guesses().length" class="user-guess bg-dark p-1 text-start">
       Guesses:
       <ng-container *ngFor="let guess of get_guesses()">
-        <span class="word bg-primary m-1 py-1 px-2 rounded">{{ guess }}</span>
+        <span  class="word m-1 py-1 px-2 rounded">{{ guess }}</span>
       </ng-container>
     </div>
     <div class="col-md-8 bg-success">

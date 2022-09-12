@@ -24,7 +24,6 @@ export class AppComponent implements OnInit {
   constructor(private game: GamelogicService) {}
 
   randomWord: string = '';
-  guesses: string[] = [];
 
   ngOnInit() {
     this.initialize();
@@ -37,9 +36,11 @@ export class AppComponent implements OnInit {
   }
 
   handleGuess(guess: string) {
-    this.game.handleGuess(guess);
+     this.game.handleGuess(guess);
     this.guess = '';
   }
+
+  
 
   get_guesses() {
     return this.game.guess_list;

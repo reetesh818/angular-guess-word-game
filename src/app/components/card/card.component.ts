@@ -21,9 +21,9 @@ export class CardComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  getword(title:string){
-    title=title.toLowerCase();
-    return (this.words as any)[title]
+  getword(title: string) {
+    title = title.toLowerCase();
+    return (this.words as any)[title];
   }
 
   setDefinition() {
@@ -46,7 +46,7 @@ export class CardComponent implements OnInit {
     this.game.setJumble();
   }
 
-  setLength(){
+  setLength() {
     this.game.setLength();
   }
 }

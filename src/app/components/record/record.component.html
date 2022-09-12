@@ -20,6 +20,12 @@
         <span class="float-end">{{ past.points }}</span>
       </div>
     </ng-container>
+    <button
+    class="btn btn-warning w-auto d-block mx-auto my-2"
+    (click)="clearHistory()"
+  >
+    Clear History
+  </button>
   </div>
   <button
     class="btn btn-danger w-auto d-block mx-auto my-2"
@@ -27,4 +33,5 @@
   >
     Reset Game
   </button>
+  
 </div>

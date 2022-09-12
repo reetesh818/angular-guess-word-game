@@ -18,6 +18,13 @@ export class GamelogicService {
   guess_Record: string[][] = [];
 
   temp = {} as WordDetails;
+  local = {word: '',
+  antonym: '',
+  definition: '',
+  synonym: '',
+  example: '',
+  jumbled: '',
+  length: '',}
 
   private _word = new BehaviorSubject<WordDetails>(<WordDetails>{
     word: '',
@@ -76,7 +83,6 @@ export class GamelogicService {
   setSynonym() {
     this.updateScore(-2);
     this.temp['synonym'] = this.randomWordDetails['synonym'][0];
-
     this._word.next(this.temp);
   }
 
@@ -96,27 +102,25 @@ export class GamelogicService {
     this._word.next(this.temp);
   }
 
-  handleGuess(guess: string) {
+  handleGuess(guess: string):boolean {
     if (guess.trim()) this.guess_list.unshift(guess);
-    this.checkAns(guess);
+    return this.checkAns(guess);
   }
 
-  checkAns(guess: string) {
+  checkAns(guess: string):boolean {
     if (guess === this.randomWord) {
       this.updateScore(4);
+      setTimeout(()=>{this.toastr.clear()},3000);
       this.toastr.success('Hurrah! Correct Guess!');
-      this.history.unshift({
-        word: this.randomWord,
-        correct: true,
-        points: this.current_score,
-      });
-      this.playRecord.push(this.temp);
-      this.guess_Record.push(this.guess_list);
+      this.storeRecord();
       setTimeout(() => {
         this.empty();
-      }, 1000);
+      }, 3000);
+      return true;
     } else {
+      setTimeout(()=>{this.toastr.clear()},2000)
       this.toastr.error('Oops!Wrong Guess!');
+      return false;
     }
   }
 
@@ -127,13 +131,7 @@ export class GamelogicService {
   }
 
   reset() {
-    this.history.unshift({
-      word: this.randomWord,
-      correct: false,
-      points: this.current_score,
-    });
-    this.playRecord.push(this.temp);
-    this.guess_Record.push(this.guess_list);
+    this.storeRecord();
     this.score = 0;
     this.empty();
   }
@@ -148,13 +146,7 @@ export class GamelogicService {
 
   getNewWord() {
     this.updateScore(-4);
-    this.history.unshift({
-      word: this.randomWord,
-      correct: false,
-      points: this.current_score,
-    });
-    this.playRecord.push(this.temp);
-    this.guess_Record.push(this.guess_list);
+    this.storeRecord();
     this.empty();
   }
 
@@ -163,7 +155,7 @@ export class GamelogicService {
     this.current_score += value;
   }
 
-  storeRecord(){
+  storeRecord() {
     this.history.unshift({
       word: this.randomWord,
       correct: false,
@@ -171,5 +163,7 @@ export class GamelogicService {
     });
     this.playRecord.push(this.temp);
     this.guess_Record.push(this.guess_list);
+    this.local = this.temp;
+    window.localStorage.setItem("myObject", JSON.stringify(this.history))
   }
 }
