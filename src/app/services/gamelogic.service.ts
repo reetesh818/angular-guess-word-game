@@ -119,6 +119,7 @@ export class GamelogicService {
   }
 
   handleHistory(index: number) {
+    this.randomWord = this.history[index].word;
     index = this.playRecord.length - 1 - index;
     this._word.next(this.playRecord[index]);
     this.guess_list = this.guess_Record[index];

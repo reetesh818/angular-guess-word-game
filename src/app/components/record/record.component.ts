@@ -31,5 +31,6 @@ export class RecordComponent {
 
   clearHistory(){
     this.game.history=[];
+    this.game.guess_list=[];
   }
 }
