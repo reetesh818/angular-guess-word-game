@@ -1,7 +1,6 @@
-import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { GamelogicService } from './services/gamelogic.service';
-import { WordDetails } from './word-details';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +9,9 @@ import { WordDetails } from './word-details';
 })
 export class AppComponent implements OnInit {
   title = 'word-guess-game';
-  @Input() words: WordDetails;
-
 
   guess: string;
-  correct : boolean  = false;
+  correct: boolean = false;
 
   details: Object = {
     Definition: 'Free',
@@ -25,11 +22,7 @@ export class AppComponent implements OnInit {
     length: 'Free',
   };
 
-  constructor(private game: GamelogicService) {
-    game.get_word().subscribe((response) => {
-      this.words = response;
-    });
-  }
+  constructor(private game: GamelogicService) {}
 
   randomWord: string = '';
 
@@ -45,7 +38,7 @@ export class AppComponent implements OnInit {
 
   handleGuess(guess: string) {
     this.guess = '';
-     this.correct =  this.game.handleGuess(guess);
+    this.correct = this.game.handleGuess(guess);
   }
 
   get_guesses() {
@@ -55,7 +48,7 @@ export class AppComponent implements OnInit {
   newWord() {
     this.game.getNewWord();
   }
-  isCorrect(guess:string){
+  isCorrect(guess: string) {
     return guess === this.game.randomWord;
   }
 }
