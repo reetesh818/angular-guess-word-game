@@ -12,7 +12,7 @@
       <div
         (click)="handleHistory(i)"
         [ngClass]="
-          past.correct ? 'border-success bg-lime' : 'border-danger bg-limered'
+          past.correct!==true ? 'border-danger bg-limered' : ' border-success bg-lime'
         "
         class="rounded border cursor-pointer clearfix m-1 p-1"
       >
@@ -26,7 +26,7 @@
   >
     Clear History
   </button>
-  </div>
+  </div>  
   <button
     class="btn btn-danger w-auto d-block mx-auto my-2"
     (click)="resetGame()"

@@ -18,13 +18,7 @@ export class GamelogicService {
   guess_Record: string[][] = [];
 
   temp = {} as WordDetails;
-  local = {word: '',
-  antonym: '',
-  definition: '',
-  synonym: '',
-  example: '',
-  jumbled: '',
-  length: '',}
+  
 
   private _word = new BehaviorSubject<WordDetails>(<WordDetails>{
     word: '',
@@ -112,7 +106,7 @@ export class GamelogicService {
       this.updateScore(4);
       setTimeout(()=>{this.toastr.clear()},3000);
       this.toastr.success('Hurrah! Correct Guess!');
-      this.storeRecord();
+      this.storeRecord(true);
       setTimeout(() => {
         this.empty();
       }, 3000);
@@ -131,7 +125,7 @@ export class GamelogicService {
   }
 
   reset() {
-    this.storeRecord();
+    this.storeRecord(false);
     this.score = 0;
     this.empty();
   }
@@ -146,7 +140,7 @@ export class GamelogicService {
 
   getNewWord() {
     this.updateScore(-4);
-    this.storeRecord();
+    this.storeRecord(false);
     this.empty();
   }
 
@@ -155,15 +149,13 @@ export class GamelogicService {
     this.current_score += value;
   }
 
-  storeRecord() {
+  storeRecord(isTrue:boolean) {
     this.history.unshift({
       word: this.randomWord,
-      correct: false,
+      correct: isTrue,
       points: this.current_score,
     });
     this.playRecord.push(this.temp);
     this.guess_Record.push(this.guess_list);
-    this.local = this.temp;
-    window.localStorage.setItem("myObject", JSON.stringify(this.history))
   }
 }
